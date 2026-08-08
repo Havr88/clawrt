@@ -1,0 +1,3 @@
+#!/bin/sh
+[ "$ACTION" = "ifup" -o "$ACTION" = "ifdown" ] || exit 0
+/usr/bin/clawrt -notify-hotplug iface "$ACTION" "$INTERFACE" "$DEVICE" "$IPADDR" &

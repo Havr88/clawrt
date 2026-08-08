@@ -1,0 +1,65 @@
+{
+  "network": {
+    "interface": {
+      "proto": "static|dhcp|pppoe",
+      "device": "br-lan|eth0|eth1",
+      "ipaddr": "string",
+      "netmask": "string",
+      "gateway": "string",
+      "dns": "list"
+    }
+  },
+  "wireless": {
+    "wifi-device": {
+      "type": "mac80211",
+      "channel": "auto|1-13",
+      "band": "2g|5g",
+      "htmode": "HT20|HT40|HE20",
+      "disabled": "0|1"
+    },
+    "wifi-iface": {
+      "device": "radio0|radio1",
+      "mode": "ap|sta",
+      "ssid": "string",
+      "encryption": "none|psk2|sae-mixed",
+      "key": "string"
+    }
+  },
+  "firewall": {
+    "zone": {
+      "name": "lan|wan",
+      "input": "ACCEPT|REJECT|DROP",
+      "output": "ACCEPT|REJECT|DROP",
+      "forward": "ACCEPT|REJECT|DROP",
+      "masq": "0|1"
+    },
+    "rule": {
+      "name": "string",
+      "src": "lan|wan",
+      "dest_port": "string",
+      "target": "ACCEPT|REJECT|DROP"
+    }
+  },
+  "dhcp": {
+    "dnsmasq": {
+      "domainneeded": "0|1",
+      "boguspriv": "0|1",
+      "local": "/lan/"
+    },
+    "dhcp": {
+      "interface": "lan",
+      "start": "integer",
+      "limit": "integer",
+      "leasetime": "string"
+    }
+  },
+  "system": {
+    "system": {
+      "hostname": "string",
+      "timezone": "string"
+    },
+    "timeserver": {
+      "server": "list"
+    }
+  }
+}

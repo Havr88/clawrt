@@ -1,0 +1,41 @@
+name: ClawRT Automated Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Build & Publish Release Assets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Build All Binaries & IPK Packages
+        run: |
+          bash scripts/build.sh
+          bash scripts/make-package.sh
+
+      - name: Generate Checksums
+        run: |
+          cd dist
+          sha256sum *.ipk > SHA256SUMS
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.ipk
+            dist/SHA256SUMS
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

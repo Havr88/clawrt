@@ -1,0 +1,12 @@
+{
+	"admin/services/clawrt": {
+		"title": "ClawRT AI",
+		"action": {
+			"type": "view",
+			"path": "clawrt/config"
+		},
+		"depends": {
+			"uci": { "clawrt": true }
+		}
+	}
+}

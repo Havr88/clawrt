@@ -1,0 +1,98 @@
+[
+  {
+    "name": "dnsmasq",
+    "package": "dnsmasq",
+    "config": "/etc/config/dhcp",
+    "control": "/etc/init.d/dnsmasq restart",
+    "logs": "logread -e dnsmasq",
+    "dependencies": ["odhcpd"]
+  },
+  {
+    "name": "dropbear",
+    "package": "dropbear",
+    "config": "/etc/config/dropbear",
+    "control": "/etc/init.d/dropbear restart",
+    "logs": "logread -e dropbear",
+    "dependencies": []
+  },
+  {
+    "name": "firewall",
+    "package": "fw4",
+    "config": "/etc/config/firewall",
+    "control": "/etc/init.d/firewall reload",
+    "logs": "logread -e fw4",
+    "dependencies": ["nftables"]
+  },
+  {
+    "name": "wireless",
+    "package": "hostapd",
+    "config": "/etc/config/wireless",
+    "control": "wifi reload",
+    "logs": "logread -e hostapd",
+    "dependencies": ["iwinfo", "wpad"]
+  },
+  {
+    "name": "network",
+    "package": "netifd",
+    "config": "/etc/config/network",
+    "control": "/etc/init.d/network restart",
+    "logs": "logread -e netifd",
+    "dependencies": []
+  },
+  {
+    "name": "dhcp",
+    "package": "odhcpd",
+    "config": "/etc/config/dhcp",
+    "control": "/etc/init.d/odhcpd restart",
+    "logs": "logread -e odhcpd",
+    "dependencies": []
+  },
+  {
+    "name": "cron",
+    "package": "cron",
+    "config": "/etc/crontabs/root",
+    "control": "/etc/init.d/cron restart",
+    "logs": "logread -e cron",
+    "dependencies": []
+  },
+  {
+    "name": "ntp",
+    "package": "ntpd",
+    "config": "/etc/config/system",
+    "control": "/etc/init.d/sysntpd restart",
+    "logs": "logread -e sysntpd",
+    "dependencies": []
+  },
+  {
+    "name": "ssh",
+    "package": "dropbear",
+    "config": "/etc/config/dropbear",
+    "control": "/etc/init.d/dropbear restart",
+    "logs": "logread -e dropbear",
+    "dependencies": []
+  },
+  {
+    "name": "package_manager",
+    "package": "apk-tools",
+    "config": "/etc/apk/repositories",
+    "control": "apk add/del/upgrade",
+    "logs": "",
+    "dependencies": []
+  },
+  {
+    "name": "ubus",
+    "package": "ubus",
+    "config": "/usr/share/rpcd/acl.d/",
+    "control": "ubus list / ubus call",
+    "logs": "",
+    "dependencies": []
+  },
+  {
+    "name": "luci",
+    "package": "luci",
+    "config": "/etc/config/luci",
+    "control": "/etc/init.d/uhttpd restart",
+    "logs": "logread -e uhttpd",
+    "dependencies": ["uhttpd", "rpcd"]
+  }
+]

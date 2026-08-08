@@ -1,0 +1,20 @@
+{
+	"luci-app-clawrt": {
+		"description": "Grant access to ClawRT configuration and service status",
+		"read": {
+			"uci": [ "clawrt" ],
+			"file": {
+				"/etc/config/clawrt": [ "read" ]
+			},
+			"ubus": {
+				"service": [ "list" ]
+			}
+		},
+		"write": {
+			"uci": [ "clawrt" ],
+			"file": {
+				"/etc/config/clawrt": [ "write" ]
+			}
+		}
+	}
+}

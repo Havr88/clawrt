@@ -1,0 +1,38 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: luci-app-clawrt 2.0.0\n"
+"POT-Creation-Date: 2026-08-08 14:35+0000\n"
+"PO-Revision-Date: 2026-08-08 14:35+0000\n"
+"Last-Translator: ClawRT i18n Generator <dev@clawrt.local>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "ClawRT AI — Agente Agéntico para OpenWrt 🐾⚡"
+msgstr "ClawRT AI — Agente Agéntico para OpenWrt 🐾⚡"
+
+msgid "Panel de Administración y Control del Agente de Inteligencia Artificial para tu Router OpenWrt."
+msgstr "Panel de Administración y Control del Agente de Inteligencia Artificial para tu Router OpenWrt."
+
+msgid "Panel de Estado & Botones de Acción Rápida"
+msgstr "Panel de Estado & Botones de Acción Rápida"
+
+msgid "Estado de Ejecución del Agente"
+msgstr "Estado de Ejecución del Agente"
+
+msgid "General & Idioma de Respuesta (i18n)"
+msgstr "General & Idioma de Respuesta (i18n)"
+
+msgid "Canal de Telegram (CGNAT Safe)"
+msgstr "Canal de Telegram (CGNAT Safe)"
+
+msgid "Base de Datos Externa Optativa (Memoria a Largo Plazo)"
+msgstr "Base de Datos Externa Optativa (Memoria a Largo Plazo)"
+
+msgid "Selector de Proveedor LLM (Model Registry & Enrutamiento)"
+msgstr "Selector de Proveedor LLM (Model Registry & Enrutamiento)"
+
+msgid "Visor de Registros del Agente (Live Logs)"
+msgstr "Visor de Registros del Agente (Live Logs)"

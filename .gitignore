@@ -1,0 +1,31 @@
+# Binarios de compilación
+build/
+*.bin
+*.elf
+*.exe
+clawrt-test
+nanoclaw-test
+
+# Paquetes OpenWrt creados
+dist/
+*.ipk
+*.apk
+
+# Archivos de seguimiento local (roadmap no subido a git)
+roadmap_sugerencias.md
+/scratch/
+/metodologia_local/
+
+# Archivos de sistema y temporales
+.DS_Store
+*.log
+job-logs*.txt
+/tmp/
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Configuración local de secretos de desarrollo
+config.local.json
+secrets.env
