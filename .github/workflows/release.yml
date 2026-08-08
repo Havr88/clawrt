@@ -5,6 +5,11 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
 jobs:
   release:
     name: Build & Publish Release Assets
@@ -32,10 +37,35 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ github.ref_name }}
+          name: "ClawRT ${{ github.ref_name }} — AI Router Agent for OpenWrt 🐾⚡"
+          body: |
+            ## ClawRT ${{ github.ref_name }}
+
+            Agente autónomo de IA ultraligero y seguro para routers OpenWrt.
+
+            ### 📦 Paquetes incluidos
+            - `clawrt_*_mipsel_24kc.ipk` — MIPS Little-Endian (Xiaomi Mi Router 4C, etc.)
+            - `clawrt_*_arm_cortex-a7_neon-vfpv4.ipk` — ARM Cortex-A7
+            - `clawrt_*_x86_64.ipk` — x86_64
+            - `clawrt_*_aarch64_cortex-a53.ipk` — AArch64
+            - `luci-app-clawrt_*_all.ipk` — Interfaz LuCI
+            - `luci-i18n-clawrt-*_all.ipk` — Traducciones (ES, EN, FR, PT, IT, RU, ZH, JA, AR)
+            - `SHA256SUMS` — Verificación de integridad
+
+            ### 🚀 Instalación rápida
+            ```sh
+            # OpenWrt 25.12+ (apk)
+            apk add --allow-untrusted clawrt_*_mipsel_24kc.ipk luci-app-clawrt_*_all.ipk
+
+            # OpenWrt <= 23.05 (opkg)
+            opkg install clawrt_*_mipsel_24kc.ipk luci-app-clawrt_*_all.ipk
+            ```
           files: |
             dist/*.ipk
             dist/SHA256SUMS
           draft: false
           prerelease: false
+          fail_on_unmatched_files: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
