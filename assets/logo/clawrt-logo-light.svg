@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 140" width="420" height="140">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght=700;800&amp;family=Open+Sans:wght=400;600&amp;display=swap');
+      .brand-text-light {
+        font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+        font-weight: 800;
+        font-size: 52px;
+        letter-spacing: -1.5px;
+      }
+      .brand-tagline-light {
+        font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
+        font-weight: 600;
+        font-size: 11px;
+        fill: #212121;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+    </style>
+    <linearGradient id="clawrtGradLight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF6F00" />
+      <stop offset="33%" stop-color="#C173FF" />
+      <stop offset="66%" stop-color="#3AB5ED" />
+      <stop offset="100%" stop-color="#00C7E2" />
+    </linearGradient>
+  </defs>
+
+  <!-- Light Mode Background Card -->
+  <rect width="420" height="140" rx="16" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2" />
+
+  <!-- Hexagonal C-Circuit Icon -->
+  <g transform="translate(24, 20)">
+    <polygon points="50,8 85,28 85,72 50,92 15,72 15,28" 
+             fill="none" 
+             stroke="url(#clawrtGradLight)" 
+             stroke-width="5" 
+             stroke-linejoin="round" />
+    <path d="M 70 34 L 50 22 L 30 34 L 30 66 L 50 78 L 70 66" 
+          fill="none" 
+          stroke="url(#clawrtGradLight)" 
+          stroke-width="4" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" />
+    <path d="M 30 34 L 50 46 L 70 34 M 30 66 L 50 54 L 70 66 M 50 46 L 50 54" 
+          fill="none" 
+          stroke="url(#clawrtGradLight)" 
+          stroke-width="3.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" />
+    <circle cx="70" cy="34" r="3" fill="#FF6F00" />
+    <circle cx="50" cy="46" r="3" fill="#C173FF" />
+    <circle cx="50" cy="54" r="3" fill="#3AB5ED" />
+    <circle cx="70" cy="66" r="3" fill="#00C7E2" />
+  </g>
+
+  <!-- Logotype Text "clawrt" -->
+  <text x="135" y="78" class="brand-text-light" fill="url(#clawrtGradLight)">clawrt</text>
+  <text x="137" y="102" class="brand-tagline-light">AI ROUTER AGENT FOR OPENWRT</text>
+</svg>

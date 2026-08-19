@@ -1,0 +1,22 @@
+{
+	"luci-app-clawrt": {
+		"description": "Grant access to ClawRT configuration, AI Copilot, and service status",
+		"read": {
+			"uci": [ "clawrt" ],
+			"file": {
+				"/etc/config/clawrt": [ "read" ],
+				"/usr/bin/clawrt": [ "exec" ],
+				"/etc/init.d/clawrt": [ "exec" ]
+			},
+			"ubus": {
+				"service": [ "list" ]
+			}
+		},
+		"write": {
+			"uci": [ "clawrt" ],
+			"file": {
+				"/etc/config/clawrt": [ "write" ]
+			}
+		}
+	}
+}

@@ -1,0 +1,34 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: luci-app-clawrt 2.0.0\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "ClawRT AI — Agente Agéntico para OpenWrt 🐾⚡"
+msgstr "ClawRT AI — وكيل الذكاء الاصطناعي لـ OpenWrt 🐾⚡"
+
+msgid "Panel de Administración y Control del Agente de Inteligencia Artificial para tu Router OpenWrt."
+msgstr "لوحة إدارة والتحكم بوكيل الذكاء الاصطناعي لجهاز التوجيه الخاص بك."
+
+msgid "Panel de Estado & Botones de Acción Rápida"
+msgstr "لوحة الحالة وأزرار الإجراءات السريعة"
+
+msgid "Estado de Ejecución del Agente"
+msgstr "حالة تشغيل الوكيل"
+
+msgid "General & Idioma de Respuesta (i18n)"
+msgstr "العام ولغة الاستجابة (i18n)"
+
+msgid "Canal de Telegram (CGNAT Safe)"
+msgstr "قناة تلغرام (متوافق مع CGNAT)"
+
+msgid "Base de Datos Externa Optativa (Memoria a Largo Plazo)"
+msgstr "قاعدة بيانات خارجية اختيارية (الذاكرة طويلة المدى)"
+
+msgid "Selector de Proveedor LLM (Model Registry & Enrutamiento)"
+msgstr "محدد مزود LLM (سجل النماذج والتوجيه)"
+
+msgid "Visor de Registros del Agente (Live Logs)"
+msgstr "عارض السجلات المباشر"

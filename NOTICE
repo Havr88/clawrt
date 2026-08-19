@@ -1,0 +1,84 @@
+ClawRT — Agente Autónomo de IA para OpenWrt
+Copyright (c) 2026 ClawRT Contributors
+
+Este proyecto utiliza, se inspira y agradece el trabajo de las siguientes comunidades y proyectos de código abierto / software libre:
+
+1. RouterClaw
+   - Sitio / Repo: https://github.com/root643/routerclaw
+   - Licencia: MIT License
+   - Descripción: Concepto base de orquestación y agente inteligente para routers OpenWrt con canal de Telegram.
+
+2. NanoClaw
+   - Sitio / Repo: https://github.com/nanocoai/nanoclaw
+   - Licencia: MIT License
+   - Descripción: Concepto de núcleo agéntico ultraligero y arquitectura modular de herramientas (skills).
+
+3. OpenClaw
+   - Sitio / Repo: https://github.com/openclaw/openclaw
+   - Licencia: MIT License
+   - Descripción: Clasificación de permisos por buckets de riesgo (ACP), confirmación de 3 estados y debouncer de mensajes.
+
+4. Hermes
+   - Sitio / Repo: https://github.com/hermes/hermes
+   - Licencia: MIT License
+   - Descripción: Circuit breaker de denegación consecutiva y control de iteraciones.
+
+5. AgentWRT
+   - Sitio / Repo: https://github.com/agentwrt/agentwrt
+   - Licencia: MIT License
+   - Descripción: Cascada FastPath cero-LLM y enrutamiento de 3 tiers con presupuestos de tokens y temperatura.
+
+6. OpenWrt Project
+   - Sitio / Repo: https://openwrt.org / https://github.com/openwrt/openwrt
+   - Licencia: GPL-2.0-only
+   - Descripción: Sistema operativo Linux embebido para routers y dispositivos de red.
+
+7. LuCI — OpenWrt Web Interface
+   - Sitio / Repo: https://github.com/openwrt/luci
+   - Licencia: Apache-2.0 / MIT
+   - Descripción: Framework e interfaz gráfica web para la administración de OpenWrt.
+
+8. Go (Golang)
+   - Sitio: https://go.dev
+   - Licencia: BSD-3-Clause
+   - Descripción: Lenguaje de programación para la compilación del binario único estático.
+
+9. golang.org/x/crypto
+   - Sitio: https://pkg.go.dev/golang.org/x/crypto
+   - Licencia: BSD-3-Clause
+   - Descripción: Implementación de algoritmos de derivación Argon2id y cifrado simétrico ChaCha20-Poly1305.
+
+10. UPX (Ultimate Packer for eXecutables)
+    - Sitio: https://upx.github.io
+    - Licencia: GPL-2.0-or-later con UPX Executable Packer Exception
+    - Descripción: Compresor de binarios ejecutable de alto rendimiento.
+
+11. github.com/skip2/go-qrcode
+    - Sitio: https://pkg.go.dev/github.com/skip2/go-qrcode
+    - Licencia: MIT License
+    - Descripción: Generador nativo de códigos QR en matriz de caracteres ASCII y formato PNG en Go puro.
+
+12. github.com/shirou/gopsutil/v3
+    - Sitio: https://pkg.go.dev/github.com/shirou/gopsutil/v3
+    - Licencia: BSD-3-Clause
+    - Descripción: Biblioteca de telemetría y métricas de consumo de RAM, CPU y estado del sistema.
+
+13. github.com/digineo/go-uci
+    - Sitio: https://pkg.go.dev/github.com/digineo/go-uci
+    - Licencia: MIT License
+    - Descripción: Parser estático nativo de archivos de configuración UCI de OpenWrt en Go puro.
+
+14. github.com/vishvananda/netlink
+    - Sitio: https://pkg.go.dev/github.com/vishvananda/netlink
+    - Licencia: Apache-2.0
+    - Descripción: Cliente de la API Netlink del kernel Linux para manipular interfaces y enrutamiento.
+
+15. github.com/golang-jwt/jwt/v5
+    - Sitio: https://pkg.go.dev/github.com/golang-jwt/jwt/v5
+    - Licencia: MIT License
+    - Descripción: Firma y validación de tokens de autenticación JWT.
+
+16. github.com/fatih/color
+    - Sitio: https://pkg.go.dev/github.com/fatih/color
+    - Licencia: MIT License
+    - Descripción: Formateador de texto y salida de colores ANSI para consolas.

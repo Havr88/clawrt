@@ -1,0 +1,27 @@
+{
+	"admin/services/clawrt": {
+		"title": "ClawRT AI",
+		"action": {
+			"type": "firstchild"
+		},
+		"depends": {
+			"uci": { "clawrt": true }
+		}
+	},
+	"admin/services/clawrt/copilot": {
+		"title": "AI Copilot",
+		"order": 1,
+		"action": {
+			"type": "view",
+			"path": "clawrt/copilot"
+		}
+	},
+	"admin/services/clawrt/config": {
+		"title": "Configuración",
+		"order": 2,
+		"action": {
+			"type": "view",
+			"path": "clawrt/config"
+		}
+	}
+}

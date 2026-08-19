@@ -1,0 +1,51 @@
+name: Build & Deploy OpenWrt Package Feed
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy-feed:
+    name: Build Packages, Feed & Deploy (Pages / Artifacts)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Build Binaries, Packages & Custom Feed
+        run: |
+          bash scripts/build.sh
+          bash scripts/make-package.sh
+          bash scripts/make-feed.sh
+
+      - name: Upload Package Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: openwrt-packages-and-feed
+          path: dist/
+
+      - name: Upload Pages Artifact
+        continue-on-error: true
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist/feed'
+
+      - name: Deploy to GitHub Pages (If Public / Pages Enabled)
+        continue-on-error: true
+        id: deployment
+        uses: actions/deploy-pages@v4
