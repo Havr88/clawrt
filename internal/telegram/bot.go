@@ -119,6 +119,10 @@ func (b *Bot) RegisterTelegramCommands() {
 			{Command: "status", Description: "📊 Estado del router, CPU, RAM y red"},
 			{Command: "diagnose", Description: "🩺 Diagnóstico de red y Auto-Sanación"},
 			{Command: "audit", Description: "🛡️ Auditoría de seguridad y contraseñas del router"},
+			{Command: "wireguard", Description: "🔒 Estado de túneles WireGuard & VPN"},
+			{Command: "dns", Description: "🌐 Privacidad DNS, DoH & AdBlock"},
+			{Command: "flash", Description: "💾 Espacio en Flash (/overlay) y paquetes"},
+			{Command: "mwan", Description: "🔀 Estado de enlaces Multi-WAN (mwan3)"},
 			{Command: "clients", Description: "📱 Dispositivos conectados en la LAN"},
 			{Command: "sticky", Description: "📶 Detectar y reconectar clientes WiFi débiles"},
 			{Command: "wifi", Description: "📶 Estado de la red WiFi"},
@@ -280,6 +284,45 @@ func (b *Bot) handleMessageText(chatID int64, text string) {
 			_ = b.SendMessage(chatID, fmt.Sprintf("❌ Error en auditoría: %v", err))
 		} else {
 			_ = b.SendMessage(chatID, fmt.Sprintf("🛡️ *Informe de Seguridad del Router:*\n```json\n%s\n```", out))
+		}
+		return
+
+	case cmd == "/wireguard" || cmd == "/wg" || cmd == "/vpn":
+		_ = b.SendMessage(chatID, "🔒 *Consultando estado de túneles WireGuard & VPN...*")
+		out, err := b.Skills.ExecuteTool("manage_wireguard", map[string]interface{}{"interface": "wg0", "auto_reconnect": false})
+		if err != nil {
+			_ = b.SendMessage(chatID, fmt.Sprintf("❌ Error en WireGuard: %v", err))
+		} else {
+			_ = b.SendMessage(chatID, fmt.Sprintf("🔒 *Estado de WireGuard:*\n```json\n%s\n```", out))
+		}
+		return
+
+	case cmd == "/dns" || cmd == "/doh" || cmd == "/adblock":
+		_ = b.SendMessage(chatID, "🌐 *Inspeccionando privacidad DNS, cifrado DoH/DoT y AdBlock...*")
+		out, err := b.Skills.ExecuteTool("inspect_dns_privacy", nil)
+		if err != nil {
+			_ = b.SendMessage(chatID, fmt.Sprintf("❌ Error al consultar privacidad DNS: %v", err))
+		} else {
+			_ = b.SendMessage(chatID, fmt.Sprintf("🌐 *Informe de Privacidad DNS & AdBlock:*\n```json\n%s\n```", out))
+		}
+		return
+
+	case cmd == "/flash" || cmd == "/disk" || cmd == "/overlay" || cmd == "/packages":
+		_ = b.SendMessage(chatID, "💾 *Analizando espacio en Flash (/overlay) y paquetes actualizables...*")
+		out, err := b.Skills.ExecuteTool("audit_flash_and_packages", nil)
+		if err != nil {
+			_ = b.SendMessage(chatID, fmt.Sprintf("❌ Error al auditar Flash: %v", err))
+		} else {
+			_ = b.SendMessage(chatID, fmt.Sprintf("💾 *Informe de Espacio en Flash:*\n```json\n%s\n```", out))
+		}
+		return
+
+	case cmd == "/mwan" || cmd == "/multiwan" || cmd == "/failover":
+		out, err := b.Skills.ExecuteTool("check_multiwan_status", nil)
+		if err != nil {
+			_ = b.SendMessage(chatID, fmt.Sprintf("❌ Error en Multi-WAN: %v", err))
+		} else {
+			_ = b.SendMessage(chatID, fmt.Sprintf("🔀 *Estado de Enlaces Multi-WAN:*\n```json\n%s\n```", out))
 		}
 		return
 

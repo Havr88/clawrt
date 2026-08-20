@@ -265,6 +265,48 @@ func (r *SkillRegistry) registerDefaults() {
 		outPath, _ := args["output_path"].(string)
 		return security.GenerateEncryptedBackup(pass, outPath)
 	}
+
+	// 10. Guardián de WireGuard & VPN
+	r.tools["manage_wireguard"] = func(args map[string]interface{}) (string, error) {
+		iface, _ := args["interface"].(string)
+		reconnect, _ := args["auto_reconnect"].(bool)
+		res, err := netintel.ManageWireGuard(iface, reconnect)
+		if err != nil {
+			return "", err
+		}
+		b, _ := json.MarshalIndent(res, "", "  ")
+		return string(b), nil
+	}
+
+	// 11. Monitor de Privacidad DNS & AdBlock
+	r.tools["inspect_dns_privacy"] = func(args map[string]interface{}) (string, error) {
+		res, err := netintel.InspectDNSPrivacy()
+		if err != nil {
+			return "", err
+		}
+		b, _ := json.MarshalIndent(res, "", "  ")
+		return string(b), nil
+	}
+
+	// 12. Asesor de Espacio en Flash y Paquetes
+	r.tools["audit_flash_and_packages"] = func(args map[string]interface{}) (string, error) {
+		res, err := sys.AuditFlashAndPackages()
+		if err != nil {
+			return "", err
+		}
+		b, _ := json.MarshalIndent(res, "", "  ")
+		return string(b), nil
+	}
+
+	// 13. Inspector de Multi-WAN (mwan3 Failover)
+	r.tools["check_multiwan_status"] = func(args map[string]interface{}) (string, error) {
+		res, err := watchdog.CheckMultiWANStatus()
+		if err != nil {
+			return "", err
+		}
+		b, _ := json.MarshalIndent(res, "", "  ")
+		return string(b), nil
+	}
 }
 
 func (r *SkillRegistry) GetToolDefinitions() []ToolDefinition {
@@ -491,6 +533,44 @@ func (r *SkillRegistry) GetToolDefinitions() []ToolDefinition {
 						"output_path": {"type": "string", "description": "Ruta destino (/tmp/backup.enc)"}
 					}
 				}`),
+			},
+		},
+		{
+			Type: "function",
+			Function: ToolFunction{
+				Name:        "manage_wireguard",
+				Description: "Inspecciona el estado de túneles WireGuard, detecta peers con handshake congelado (> 180s) y permite reconectar automáticamente.",
+				Parameters: json.RawMessage(`{
+					"type": "object",
+					"properties": {
+						"interface": {"type": "string", "description": "Interfaz WireGuard (ej: wg0)"},
+						"auto_reconnect": {"type": "boolean", "description": "Si es true, reinicia el túnel para forzar reconexión"}
+					}
+				}`),
+			},
+		},
+		{
+			Type: "function",
+			Function: ToolFunction{
+				Name:        "inspect_dns_privacy",
+				Description: "Audita la privacidad DNS del router (DoH / DoT cifrado), filtrado de publicidad/malware (AdBlock) y riesgo de fuga de DNS (DNS leak).",
+				Parameters:  json.RawMessage(`{"type":"object","properties":{}}`),
+			},
+		},
+		{
+			Type: "function",
+			Function: ToolFunction{
+				Name:        "audit_flash_and_packages",
+				Description: "Audita el espacio libre en Flash (/overlay), evalúa el riesgo antes de instalar paquetes y lista actualizaciones disponibles.",
+				Parameters:  json.RawMessage(`{"type":"object","properties":{}}`),
+			},
+		},
+		{
+			Type: "function",
+			Function: ToolFunction{
+				Name:        "check_multiwan_status",
+				Description: "Inspecciona el estado de múltiples enlaces WAN (mwan3), balanceo de carga y detección de failover.",
+				Parameters:  json.RawMessage(`{"type":"object","properties":{}}`),
 			},
 		},
 	}

@@ -101,12 +101,33 @@ func GetSystemInfo() *SystemInfo {
 }
 
 func GetNetworkSummary() string {
-	var sb strings.Builder
+	buf := GetBuffer()
+	defer PutBuffer(buf)
+
+	// Read interface stats directly from /proc/net/dev
+	if devData, err := os.ReadFile("/proc/net/dev"); err == nil {
+		buf.WriteString("📡 Estadísticas de interfaces (/proc/net/dev):\n")
+		lines := strings.Split(string(devData), "\n")
+		for _, l := range lines {
+			if strings.Contains(l, ":") {
+				parts := strings.Split(l, ":")
+				iface := strings.TrimSpace(parts[0])
+				fields := strings.Fields(parts[1])
+				if len(fields) >= 9 {
+					rxBytes, _ := strconv.ParseInt(fields[0], 10, 64)
+					txBytes, _ := strconv.ParseInt(fields[8], 10, 64)
+					if rxBytes > 0 || txBytes > 0 {
+						buf.WriteString(fmt.Sprintf(" • %s: RX %.2f MB | TX %.2f MB\n", iface, float64(rxBytes)/(1024*1024), float64(txBytes)/(1024*1024)))
+					}
+				}
+			}
+		}
+	}
 
 	// Read WAN/LAN interface IP
 	out, err := exec.Command("ip", "-4", "addr", "show").Output()
 	if err == nil {
-		sb.WriteString("📡 Interfaces de red:\n")
+		buf.WriteString("\n🌐 Direcciones IP:\n")
 		for _, line := range strings.Split(string(out), "\n") {
 			line = strings.TrimSpace(line)
 			if strings.HasPrefix(line, "inet ") {
@@ -116,25 +137,23 @@ func GetNetworkSummary() string {
 					if len(parts) >= 4 {
 						iface = parts[len(parts)-1]
 					}
-					sb.WriteString(fmt.Sprintf(" • %s: %s\n", iface, parts[1]))
+					buf.WriteString(fmt.Sprintf(" • %s: %s\n", iface, parts[1]))
 				}
 			}
 		}
-	} else {
-		sb.WriteString("📡 No se pudo ejecutar ip addr\n")
 	}
 
-	// WiFi clients via iwinfo
+	// WiFi info
 	wifiOut, err := exec.Command("iwinfo").Output()
 	if err == nil && len(wifiOut) > 0 {
-		sb.WriteString("\n📶 Estado WiFi:\n")
+		buf.WriteString("\n📶 Estado WiFi:\n")
 		lines := strings.Split(string(wifiOut), "\n")
 		for _, l := range lines {
 			if strings.Contains(l, "ESSID") || strings.Contains(l, "Access Point") {
-				sb.WriteString(" " + strings.TrimSpace(l) + "\n")
+				buf.WriteString(" " + strings.TrimSpace(l) + "\n")
 			}
 		}
 	}
 
-	return sb.String()
+	return buf.String()
 }

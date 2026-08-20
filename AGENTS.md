@@ -51,3 +51,10 @@ All tools must adhere to strict input sanitization, 15-second execution timeouts
 14. `manage_sqm_qos`: Inspect and configure SQM (Cake / FQ_Codel) to eliminate Bufferbloat.
 15. `execute_intent_plan`: Execute declarative multi-step plans (guest WiFi isolation, port forwarding, parental restrictions) with atomic verification.
 16. `backup_to_supabase`: Generate full OpenWrt sysupgrade backup for offsite storage.
+17. `audit_router_security`: Comprehensive security audit of root credentials, WAN exposure, and firewall rules.
+18. `manage_sticky_clients`: Detect weak WiFi stations (< -80 dBm) and trigger soft-roaming disassociation.
+19. `manage_wireguard`: Inspect WireGuard VPN tunnels, detect stalled handshakes (> 180s), and auto-reconnect peers.
+20. `inspect_dns_privacy`: Audit DoH/DoT encrypted DNS configurations, AdBlock engines, and DNS leak risks.
+21. `audit_flash_and_packages`: Inspect `/overlay` flash memory headroom, evaluate installation safety, and list package updates.
+22. `check_multiwan_status`: Inspect multi-WAN (`mwan3`) failover and load balancing status.
+

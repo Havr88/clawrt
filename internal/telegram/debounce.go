@@ -81,3 +81,40 @@ func (d *Debouncer) flush(chatID int64) {
 	merged := strings.Join(buf.messages, "\n")
 	d.callback(chatID, merged)
 }
+
+// OutboundRateLimiter limits sending rate to maxTokens per interval (Token Bucket algorithm)
+type OutboundRateLimiter struct {
+	mu         sync.Mutex
+	tokens     float64
+	maxTokens  float64
+	refillRate float64 // tokens per second
+	lastRefill time.Time
+}
+
+func NewOutboundRateLimiter(maxTokens float64, refillRate float64) *OutboundRateLimiter {
+	return &OutboundRateLimiter{
+		tokens:     maxTokens,
+		maxTokens:  maxTokens,
+		refillRate: refillRate,
+		lastRefill: time.Now(),
+	}
+}
+
+func (rl *OutboundRateLimiter) Allow() bool {
+	rl.mu.Lock()
+	defer rl.mu.Unlock()
+
+	now := time.Now()
+	elapsed := now.Sub(rl.lastRefill).Seconds()
+	rl.tokens += elapsed * rl.refillRate
+	if rl.tokens > rl.maxTokens {
+		rl.tokens = rl.maxTokens
+	}
+	rl.lastRefill = now
+
+	if rl.tokens >= 1.0 {
+		rl.tokens -= 1.0
+		return true
+	}
+	return false
+}
